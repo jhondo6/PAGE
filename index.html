@@ -59,8 +59,18 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 1rem;
+            padding: 6rem 1rem 2rem 1rem;
             background: radial-gradient(circle at center, #111b27 0%, #0a0e17 100%);
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 2px solid #00ff66;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
         }
 
         .hero h1 {
@@ -169,7 +179,6 @@
 <body>
 
     <header>
-        <img src="minha-foto.jpg" alt="Minha Foto" style="width: 150px; height: 150px; border-radius: 50%; border: 2px solid #00ff66; object-fit: cover;">
         <div class="logo">&gt; dev_security.sh_</div>
         <nav>
             <a href="#sobre">Sobre</a>
@@ -179,6 +188,7 @@
     </header>
 
     <section class="hero">
+        <img src="minha-foto.jpg" alt="Minha Foto" class="profile-img">
         <div class="tag-badge">Estudante de ADS & Entusiasta de Pentest</div>
         <h1>Construindo Sistemas & <span>Explorando Vulnerabilidades</span></h1>
         <p>Focado em desenvolvimento de software, análise de segurança e infraestrutura de tecnologia.</p>
