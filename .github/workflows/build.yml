@@ -20,7 +20,9 @@ jobs:
         with:
           ruby-version: '3.2'
 
-      - name: Run build script
+      - name: Build site
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: ruby build.rb
 
       - name: Commit and push generated HTML
