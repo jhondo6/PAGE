@@ -12,7 +12,7 @@ dados['habilidades'] ||= []
 dados['projetos'] ||= []
 
 # Injeção da API Key fornecida para os testes do protótipo
-GEMINI_KEY = "AQ.Ab8RN6LOcGLkXv6FmoIVM0Kv_g60uM6K2ARICvj42Cyy7IvfyA"
+GEMINI_KEY = "AQ.Ab8RN6KzIwL1ry9qNfQZE0cgfYaF94ZLGCJrQ-ntsnrJuvo-5Q"
 
 # 2. Template HTML
 template_html = <<~HTML
