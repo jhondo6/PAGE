@@ -12,8 +12,8 @@ dados['habilidades'] ||= []
 dados['projetos'] ||= []
 
 # Injeção da API Key fornecida para os testes do protótipo
-GEMINI_KEY = "AQ.Ab8RN6KzIwL1ry9qNfQZE0cgfYaF94ZLGCJrQ-ntsnrJuvo-5Q"
-
+# Em vez de colocar o texto da chave aqui, lemos a variável injetada pelo GitHub Actions
+GEMINI_KEY = ENV['GEMINI_API_KEY'] || ""
 # 2. Template HTML
 template_html = <<~HTML
 <!DOCTYPE html>
