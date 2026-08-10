@@ -8,53 +8,32 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #06090f; color: #e6edf3; line-height: 1.6; padding-top: 80px; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
-        
         header { background: rgba(13, 17, 23, 0.9); padding: 1rem 2rem; position: fixed; width: 100%; top: 0; border-bottom: 1px solid #30363d; backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
         .logo { font-size: 1.2rem; font-weight: bold; color: #00ff66; font-family: monospace; }
         .logo::before { content: "{ "; }
         .logo::after { content: " } Code.Architect"; }
         nav a { color: #8b949e; margin-left: 1.5rem; }
         nav a:hover, nav a.active { color: #00ff66; }
-
-        .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem 1rem; background: radial-gradient(circle at center, #0a111a 0%, #06090f 100%); }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 0.5rem; color: #ffffff; }
-        .hero h1 span { color: #00ff66; }
-        .hero p { font-size: 1.3rem; color: #8b949e; max-width: 700px; margin-bottom: 2.5rem; }
-
-        .container { max-width: 1100px; margin: 0 auto; padding: 4rem 1.5rem; }
-        .section-title { text-align: center; font-size: 2rem; margin-bottom: 3rem; color: #ffffff; font-family: monospace; text-transform: uppercase; letter-spacing: 2px; }
-        .section-title::before { content: "> "; color: #00ff66; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-        .card { background: #11151c; border: 1px solid #30363d; border-radius: 8px; padding: 1.5rem; transition: 0.3s; position: relative; }
-        .card:hover { transform: translateY(-5px); border-color: #00ff66; box-shadow: 0 5px 15px rgba(0,255,102,0.1); }
-        .card h3 { color: #00ff66; margin-bottom: 0.75rem; font-size: 1.25rem; font-family: monospace; }
-        .card p { color: #8b949e; font-size: 0.95rem; margin-bottom: 1rem; }
-
-        .skills-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
-        .skill-item { background: #161b22; padding: 0.3rem 0.8rem; border-radius: 4px; font-size: 0.8rem; color: #c9d1d9; font-family: monospace; border: 1px solid #30363d; }
-
-        #code-architect { background: #0a111a; border-top: 1px solid #30363d; border-bottom: 1px solid #30363d; }
-        .architect-wrapper { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        
-        #code-to-process { width: 100%; height: 200px; background: #06090f; color: #c9d1d9; border: 1px solid #30363d; border-radius: 8px; padding: 1rem; font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; resize: none; outline: none; }
-        #code-to-process:focus { border-color: #00ff66; box-shadow: 0 0 10px rgba(0,255,102,0.1); }
-        
-        .architect-controls { display: flex; justify-content: center; }
-        .btn { padding: 0.75rem 1.5rem; border-radius: 6px; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: monospace; text-transform: uppercase; }
-        .btn-primary { background: #00ff66; color: #0a0e17; }
-        .btn-primary:hover { background: #00cc52; transform: scale(1.05); }
-        .btn-primary:disabled { background: #30363d; color: #8b949e; cursor: not-allowed; transform: none; }
-        
-        #map-visualization { background: #06090f; border: 1px solid #30363d; border-radius: 8px; min-height: 250px; padding: 1.5rem; color: #8b949e; overflow: auto; }
-
-        footer { text-align: center; padding: 2rem; border-top: 1px solid #30363d; color: #8b949e; font-size: 0.9rem; background: #06090f; }
+        .hero { text-align: center; padding: 4rem 2rem; background: radial-gradient(circle at center, #161b22 0%, #06090f 100%); }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; color: #ffffff; }
+        .hero p { color: #8b949e; max-width: 600px; margin: 0 auto 2rem; }
+        .btn { display: inline-block; background: #00ff66; color: #06090f; padding: 0.8rem 1.5rem; border-radius: 6px; font-weight: bold; cursor: pointer; border: none; }
+        .btn:hover { background: #00cc52; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        .section { margin-bottom: 4rem; }
+        .section-title { font-size: 1.5rem; color: #00ff66; margin-bottom: 1.5rem; border-bottom: 1px solid #30363d; padding-bottom: 0.5rem; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .card { background: #0d1117; border: 1px solid #30363d; padding: 1.5rem; border-radius: 8px; }
+        .card h3 { color: #58a6ff; margin-bottom: 0.5rem; }
+        textarea { width: 100%; height: 180px; background: #0d1117; color: #00ff66; border: 1px solid #30363d; padding: 1rem; font-family: monospace; border-radius: 6px; margin-bottom: 1rem; resize: vertical; }
+        #output { background: #010409; border: 1px solid #30363d; padding: 1rem; border-radius: 6px; color: #7ee787; font-family: monospace; white-space: pre-wrap; display: none; margin-top: 1rem; }
+        footer { text-align: center; padding: 2rem; color: #8b949e; border-top: 1px solid #30363d; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo"></div>
+        <div class="logo">PAGE</div>
         <nav>
             <a href="#about">Sobre</a>
             <a href="#skills">Habilidades</a>
@@ -63,87 +42,132 @@
         </nav>
     </header>
 
-    <section class="hero" id="home">
-        <h1>Diagramação Lógica & <span>Mapeamento Visual de Código</span></h1>
+    <section class="hero">
+        <h1>Diagramação Lógica & Mapeamento Visual de Código</h1>
         <p>Transforme códigos complexos em mapas interativos e explicações simples para clientes e equipes.</p>
-        <a href="#code-architect" class="btn btn-primary">Iniciar Arquiteto</a>
+        <a href="#code-architect" class="btn">INICIAR ARQUITETO</a>
     </section>
 
-    <section class="container" id="code-architect">
-        <h2 class="section-title">The Code Architect</h2>
-        <div class="card">
-            <h3>Visualizador Lógico de Código</h3>
-            <p>Cole um trecho de código abaixo e clique em 'Mapear'. A IA extrairá os nós de execução para montar a estrutura do diagrama.</p>
-            
-            <div class="architect-wrapper">
-                <textarea id="code-to-process" placeholder="// Cole seu código aqui...
-function calcularDesconto(preco, cupom) {
-  if (cupom === 'DEVS10') {
-    return preco * 0.9;
-  }
-  return preco;
-}"></textarea>
-                
-                <div class="architect-controls">
-                    <button id="architect-btn" class="btn btn-primary">Mapear Código</button>
-                </div>
-
-                <div id="map-visualization">O mapa lógico e os nós extraídos aparecerão aqui...</div>
+    <div class="container">
+        <section id="about" class="section">
+            <h2 class="section-title">> SOBRE MIM</h2>
+            <div class="card">
+                <p>Atualmente fodase nálise e Desenvolvimento de Sistemas (ADS). Apaixonado por tecnologia, arquitetura de software e segurança da informação.</p>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <section id="skills" class="section">
+            <h2 class="section-title">> HABILIDADES</h2>
+            <div class="card-grid">
+                
+                    <div class="card">
+                        <h3>{"categoria"=>"Desenvolvimento (ADS)", "descricao"=>"Criação de aplicações estruturadas, automação e lógica de programação.", "items"=>["HTML/CSS", "JavaScript", "Python", "Ruby", "Git/GitHub"]}</h3>
+                    </div>
+                
+                    <div class="card">
+                        <h3>{"categoria"=>"Cybersecurity & Pentest", "descricao"=>"Estudos focados em segurança ofensiva e análise de redes.", "items"=>["Linux", "Burp Suite", "Nmap", "OWASP Top 10"]}</h3>
+                    </div>
+                
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <h2 class="section-title">> PROJETOS</h2>
+            <div class="card-grid">
+                
+                    <div class="card">
+                        <h3>Portfólio Pessoal</h3>
+                        <p>Página web responsiva gerada via Ruby e hospedada no GitHub Pages.</p>
+                    </div>
+                
+                    <div class="card">
+                        <h3>Lab de Pentest / Scripts</h3>
+                        <p>Automações e scripts desenvolvidos para testes de segurança e estudos de rede.</p>
+                    </div>
+                
+            </div>
+        </section>
+
+        <section id="code-architect" class="section">
+            <h2 class="section-title">> THE CODE ARCHITECT</h2>
+            <div class="card">
+                <p style="margin-bottom: 1rem; color: #8b949e;">
+                    Cole um trecho de código abaixo e clique em 'Mapear'. A IA extrairá os nós de execução.
+                </p>
+                <textarea id="codeInput" placeholder="// Cole seu código aqui..."></textarea>
+                <button class="btn" onclick="mapearCodigo()">MAPEAR CÓDIGO</button>
+                <button class="btn" style="background:#30363d; color:#e6edf3;" onclick="redefinirChave()">ALTERAR CHAVE API</button>
+                <div id="output"></div>
+            </div>
+        </section>
+    </div>
 
     <footer>
         <p>&copy; 2026 - Desenvolvido para estudos em ADS & Segurança</p>
     </footer>
 
-    <script type="module">
-        import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
-
-        const API_KEY = "";
-        const genAI = new GoogleGenerativeAI(API_KEY);
-        const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-
-        const codeInput = document.getElementById('code-to-process');
-        const architectBtn = document.getElementById('architect-btn');
-        const vizArea = document.getElementById('map-visualization');
-
-        architectBtn.addEventListener('click', async () => {
-            const code = codeInput.value.trim();
-            if (!code) return alert('Por favor, cole algum código para mapear.');
-
-            architectBtn.disabled = true;
-            architectBtn.innerText = 'Processando...';
-            vizArea.innerHTML = 'Analisando estrutura e gerando nós do mapa...';
-
-            const prompt = `
-                Você é o "The Code Architect". Analise o código fornecido e retorne APENAS um objeto JSON válido (sem texto adicional e sem blocos de código markdown) na seguinte estrutura:
-                {
-                  "moduloPrincipal": "Nome do módulo ou script",
-                  "nos": [
-                    { "id": 1, "nome": "Entrada de Dados", "tipo": "entrada", "descricao": "Explicacao simples" },
-                    { "id": 2, "nome": "Processamento Lógico", "tipo": "condicional", "descricao": "Explicacao simples" }
-                  ]
+    <script>
+        function obterChaveAPI() {
+            let key = localStorage.getItem('GEMINI_API_KEY');
+            if (!key) {
+                key = prompt("Por favor, informe sua Gemini API Key (começa com AIzaSy):");
+                if (key) {
+                    localStorage.setItem('GEMINI_API_KEY', key.trim());
                 }
-                Código:
-                ${code}
-            `;
+            }
+            return key;
+        }
+
+        function redefinirChave() {
+            localStorage.removeItem('GEMINI_API_KEY');
+            obterChaveAPI();
+        }
+
+        async function mapearCodigo() {
+            const code = document.getElementById('codeInput').value;
+            const output = document.getElementById('output');
+            
+            if (!code.trim()) {
+                alert('Cole algum código antes de mapear!');
+                return;
+            }
+
+            const apiKey = obterChaveAPI();
+            if (!apiKey) {
+                alert('É necessária uma API Key do Gemini para realizar a análise.');
+                return;
+            }
+
+            output.style.display = 'block';
+            output.innerText = 'Analisando código com o Gemini...';
 
             try {
-                const result = await model.generateContent(prompt);
-                const response = await result.response;
-                const text = response.text().replace(/\`\`\`json|\`\`\`/g, '').trim();
-                
-                const data = JSON.parse(text);
-                vizArea.innerHTML = `<pre style="color: #00ff66;">${JSON.stringify(data, null, 2)}</pre>`;
-            } catch (error) {
-                console.error(error);
-                vizArea.innerHTML = "❌ Erro ao conectar com a API do Gemini. Verifique a chave ou tente um código mais simples.";
-            } finally {
-                architectBtn.disabled = false;
-                architectBtn.innerText = 'Mapear Código';
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: `Analise o seguinte código e extraia a estrutura de execução (nós, entradas, saídas e possíveis riscos/SQL Injection/vulnerabilidades) em formato JSON limpo:
+
+${code}`
+                            }]
+                        }]
+                    })
+                });
+
+                const data = await response.json();
+                if (data.candidates && data.candidates[0].content.parts[0].text) {
+                    output.innerText = data.candidates[0].content.parts[0].text;
+                } else {
+                    output.innerText = '❌ Erro ao processar resposta. Verifique a chave configurada.
+' + JSON.stringify(data, null, 2);
+                }
+            } catch (err) {
+                output.innerText = '❌ Erro de conexão com a API do Gemini: ' + err.message;
             }
-        });
+        }
     </script>
+
 </body>
 </html>
