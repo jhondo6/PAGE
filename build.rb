@@ -46,7 +46,7 @@ template_html = <<~HTML
 
     <section class="hero">
         <h1>The Code Architect</h1>
-        <p>Mapeamento de execução, análise de fluxo e verificação de vulnerabilidades via IA.</p>
+        <p>Facilitador de código: análise de fluxo, explicação simples e verificação de vulnerabilidades.</p>
     </section>
 
     <div class="container">
@@ -58,12 +58,12 @@ template_html = <<~HTML
         </section>
 
         <section id="code-architect" class="section">
-            <h2 class="section-title">> ANALISADOR DE CÓDIGO</h2>
+            <h2 class="section-title">> FACILITADOR DE CÓDIGO</h2>
             <div class="card">
                 <label style="display:block; margin-bottom: 0.5rem; color: #8b949e; font-size: 0.9rem;">
-                    Sua Gemini API Key (começa com AIzaSy):
+                    Sua Gemini API Key:
                 </label>
-                <input type="password" id="apiKeyInput" placeholder="Cole sua chave AIzaSy... aqui" />
+                <input type="password" id="apiKeyInput" placeholder="Cole sua chave aqui..." />
 
                 <label style="display:block; margin-bottom: 0.5rem; color: #8b949e; font-size: 0.9rem;">
                     Código para Análise:
@@ -97,13 +97,13 @@ template_html = <<~HTML
                 const code = codeInput.value.trim();
 
                 if (!apiKey) {
-                    alert('Por favor, digite ou cole sua Gemini API Key no primeiro campo!');
+                    alert('Por favor, insira sua API Key no campo superior!');
                     apiKeyInput.focus();
                     return;
                 }
 
                 if (!code) {
-                    alert('Por favor, cole o código que deseja analisar!');
+                    alert('Por favor, cole um código antes de mapear!');
                     codeInput.focus();
                     return;
                 }
@@ -111,23 +111,23 @@ template_html = <<~HTML
                 localStorage.setItem('GEMINI_API_KEY', apiKey);
 
                 output.style.display = 'block';
-                output.innerText = '⏳ Conectando ao Gemini e analisando o código...';
+                output.innerText = '⏳ Processando e simplificando o código...';
 
                 try {
-                    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+                    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             contents: [{
                                 parts: [{
-                                    text: "Analise o código abaixo e traga em JSON:\n1. Entradas/Parâmetros\n2. Fluxo de execução\n3. Riscos de Segurança/Vulnerabilidades\n\nCódigo:\n" + code
+                                    text: "Atue como um facilitador de código e arquiteto de software. Analise o código fornecido e traga uma resposta clara dividida em:\n\n1. RESUMO EXECUTIVO (Explicação simples em linguagem acessível do que o código faz)\n2. FLUXO DE EXECUÇÃO (Passo a passo lógico das entradas até as saídas)\n3. PONTOS ATENÇÃO & SEGURANÇA (Vulnerabilidades como SQL Injection, falhas de validação ou melhorias de código)\n\nCódigo:\n" + code
                                 }]
                             }]
                         })
                     });
 
                     const data = await res.json();
-                    if (data.candidates && data.candidates[0].content.parts[0].text) {
+                    if (data.candidates && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
                         output.innerText = data.candidates[0].content.parts[0].text;
                     } else if (data.error) {
                         output.innerText = "❌ Erro na API do Gemini: " + data.error.message;
@@ -135,7 +135,7 @@ template_html = <<~HTML
                         output.innerText = "❌ Resposta não esperada:\n" + JSON.stringify(data, null, 2);
                     }
                 } catch (err) {
-                    output.innerText = "❌ Erro na conexão: " + err.message;
+                    output.innerText = "❌ Erro na requisição: " + err.message;
                 }
             });
         });
