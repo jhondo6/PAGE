@@ -1,8 +1,9 @@
 require 'yaml'
 
-# Carrega os dados do YAML
+# Carrega os dados
 dados = YAML.load_file('dados.yml')
 
+# Gera o documento HTML
 html_content = <<~HTML
 <!DOCTYPE html>
 <html lang="pt-BR">
