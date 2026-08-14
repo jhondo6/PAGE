@@ -1,154 +1,79 @@
 require 'yaml'
-require 'erb'
 
-dados = YAML.load_file('dados.yml') rescue {}
-dados['nome'] ||= "Seu Nome"
-dados['sobre'] ||= "Estudante de ADS & Segurança da Informação."
+# Carrega os dados do YAML
+dados = YAML.load_file('dados.yml')
 
-template_html = <<~HTML
+html_content = <<~HTML
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Code Architect | <%= dados['nome'] %></title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', monospace, sans-serif; }
-        body { background-color: #06090f; color: #e6edf3; line-height: 1.6; padding-top: 80px; }
-        header { background: rgba(13, 17, 23, 0.9); padding: 1rem 2rem; position: fixed; width: 100%; top: 0; border-bottom: 1px solid #30363d; backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
-        .logo { font-size: 1.2rem; font-weight: bold; color: #00ff66; font-family: monospace; }
-        nav a { color: #8b949e; margin-left: 1.5rem; text-decoration: none; }
-        nav a:hover { color: #00ff66; }
-        .hero { text-align: center; padding: 3rem 2rem; background: radial-gradient(circle at center, #161b22 0%, #06090f 100%); }
-        .hero h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #ffffff; }
-        .hero p { color: #8b949e; max-width: 600px; margin: 0 auto 1.5rem; }
-        .btn { display: inline-block; background: #00ff66; color: #06090f; padding: 0.8rem 1.5rem; border-radius: 6px; font-weight: bold; cursor: pointer; border: none; font-size: 0.95rem; }
-        .btn:hover { background: #00cc52; }
-        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
-        .section { margin-bottom: 3rem; }
-        .section-title { font-size: 1.4rem; color: #00ff66; margin-bottom: 1rem; border-bottom: 1px solid #30363d; padding-bottom: 0.5rem; }
-        .card { background: #0d1117; border: 1px solid #30363d; padding: 1.5rem; border-radius: 8px; }
-        input[type="text"] { width: 100%; background: #010409; color: #7ee787; border: 1px solid #30363d; padding: 0.8rem; font-family: monospace; border-radius: 6px; margin-bottom: 1rem; }
-        textarea { width: 100%; height: 180px; background: #010409; color: #00ff66; border: 1px solid #30363d; padding: 1rem; font-family: monospace; border-radius: 6px; margin-bottom: 1rem; resize: vertical; }
-        #output { background: #010409; border: 1px solid #30363d; padding: 1rem; border-radius: 6px; color: #7ee787; font-family: monospace; white-space: pre-wrap; display: none; margin-top: 1rem; max-height: 400px; overflow-y: auto; }
-        footer { text-align: center; padding: 2rem; color: #8b949e; border-top: 1px solid #30363d; font-size: 0.9rem; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#{dados['perfil']['nome']} | Portfólio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen">
 
-    <header>
-        <div class="logo">{ Code.Architect }</div>
-        <nav>
-            <a href="#about">Sobre</a>
-            <a href="#code-architect">Architect</a>
-        </nav>
-    </header>
+  <!-- Header / Hero -->
+  <header class="max-w-4xl mx-auto pt-16 pb-8 px-6 text-center border-b border-slate-800">
+    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-400 to-cyan-500 bg-clip-text text-transparent">
+      #{dados['perfil']['nome']}
+    </h1>
+    <p class="mt-4 text-xl text-slate-400 font-medium">#{dados['perfil']['cargo']}</p>
+    
+    <div class="mt-6 flex justify-center gap-4">
+      <a href="#{dados['perfil']['github']}" target="_blank" class="px-4 py-2 bg-slate-900 border border-slate-800 rounded-lg hover:border-emerald-500 text-sm font-medium transition">GitHub</a>
+      <a href="#{dados['perfil']['linkedin']}" target="_blank" class="px-4 py-2 bg-slate-900 border border-slate-800 rounded-lg hover:border-cyan-500 text-sm font-medium transition">LinkedIn</a>
+      <a href="mailto:#{dados['perfil']['email']}" class="px-4 py-2 bg-slate-900 border border-slate-800 rounded-lg hover:border-indigo-500 text-sm font-medium transition">Email</a>
+    </div>
+  </header>
 
-    <section class="hero">
-        <h1>The Code Architect</h1>
-        <p>Facilitador de código: análise de fluxo, explicação simples e verificação de vulnerabilidades.</p>
+  <main class="max-w-4xl mx-auto px-6 py-12 space-y-12">
+    <!-- Sobre Mim -->
+    <section class="bg-slate-900/50 p-6 rounded-xl border border-slate-800">
+      <h2 class="text-xl font-bold text-emerald-400 mb-3">Sobre Mim</h2>
+      <p class="text-slate-300 leading-relaxed">#{dados['perfil']['sobre']}</p>
     </section>
 
-    <div class="container">
-        <section id="about" class="section">
-            <h2 class="section-title">> SOBRE</h2>
-            <div class="card">
-                <p><%= dados['sobre'] %></p>
+    <!-- Habilidades -->
+    <section>
+      <h2 class="text-xl font-bold text-cyan-400 mb-4">Habilidades & Conhecimentos</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        #{dados['skills'].map { |sk| "
+          <div class='bg-slate-900 p-4 rounded-xl border border-slate-800'>
+            <h3 class='text-sm font-semibold text-slate-200 mb-2'>#{sk['categoria']}</h3>
+            <div class='flex flex-wrap gap-1.5'>
+              #{sk['itens'].map { |item| "<span class='text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded'>#{item}</span>" }.join}
             </div>
-        </section>
+          </div>
+        " }.join}
+      </div>
+    </section>
 
-        <section id="code-architect" class="section">
-            <h2 class="section-title">> FACILITADOR DE CÓDIGO</h2>
-            <div class="card">
-                <form onsubmit="return false;">
-                    <label style="display:block; margin-bottom: 0.5rem; color: #8b949e; font-size: 0.9rem;">
-                        Sua Gemini API Key:
-                    </label>
-                    <input type="text" id="apiKeyInput" placeholder="Cole sua chave aqui..." autocomplete="off" />
-
-                    <label style="display:block; margin-bottom: 0.5rem; color: #8b949e; font-size: 0.9rem;">
-                        Código para Análise:
-                    </label>
-                    <textarea id="codeInput" placeholder="// Cole seu código aqui..."></textarea>
-                    
-                    <button id="btnMapear" class="btn" type="button">MAPEAR CÓDIGO</button>
-                </form>
-                <div id="output"></div>
+    <!-- Projetos -->
+    <section>
+      <h2 class="text-xl font-bold text-indigo-400 mb-4">Projetos em Destaque</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        #{dados['projetos'].map { |proj| "
+          <div class='bg-slate-900 p-6 rounded-xl border border-slate-800 flex flex-col justify-between hover:border-indigo-500/50 transition'>
+            <div>
+              <h3 class='text-lg font-semibold text-slate-100'>#{proj['titulo']}</h3>
+              <p class='mt-2 text-sm text-slate-400'>#{proj['descricao']}</p>
             </div>
-        </section>
-    </div>
-
-    <footer>
-        <p>&copy; <%= Time.now.year %> - ADS & Segurança</p>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var apiKeyInput = document.getElementById('apiKeyInput');
-            var codeInput = document.getElementById('codeInput');
-            var btnMapear = document.getElementById('btnMapear');
-            var output = document.getElementById('output');
-
-            var savedKey = localStorage.getItem('GEMINI_API_KEY');
-            if (savedKey) {
-                apiKeyInput.value = savedKey;
-            }
-
-            btnMapear.addEventListener('click', function() {
-                var apiKey = apiKeyInput.value.trim();
-                var code = codeInput.value.trim();
-
-                if (!apiKey) {
-                    alert('Por favor, insira sua API Key!');
-                    apiKeyInput.focus();
-                    return;
-                }
-
-                if (!code) {
-                    alert('Por favor, cole o código para análise!');
-                    codeInput.focus();
-                    return;
-                }
-
-                localStorage.setItem('GEMINI_API_KEY', apiKey);
-
-                output.style.display = 'block';
-                output.innerText = '⏳ Processando e simplificando o código...';
-
-                var promptText = "Atue como um facilitador de código e arquiteto de software. Analise o código fornecido e traga uma resposta clara dividida em:\\n\\n1. RESUMO EXECUTIVO\\n2. FLUXO DE EXECUÇÃO\\n3. PONTOS DE ATENÇÃO & SEGURANÇA\\n\\nCódigo:\\n" + code;
-
-                fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + apiKey, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{
-                            parts: [{
-                                text: promptText
-                            }]
-                        }]
-                    })
-                })
-                .then(function(res) { return res.json(); })
-                .then(function(data) {
-                    if (data.candidates && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
-                        output.innerText = data.candidates[0].content.parts[0].text;
-                    } else if (data.error) {
-                        output.innerText = '❌ Erro na API do Gemini: ' + data.error.message;
-                    } else {
-                        output.innerText = '❌ Resposta inesperada:\\n' + JSON.stringify(data, null, 2);
-                    }
-                })
-                .catch(function(err) {
-                    output.innerText = '❌ Erro na requisição: ' + err.message;
-                });
-            });
-        });
-    </script>
-
+            <div class='mt-4 flex items-center justify-between'>
+              <div class='flex gap-1'>
+                #{proj['techs'].map { |t| "<span class='text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded'>#{t}</span>" }.join}
+              </div>
+              <a href='#{proj['link']}' target='_blank' class='text-xs text-indigo-400 hover:underline'>Ver projeto &rarr;</a>
+            </div>
+          </div>
+        " }.join}
+      </div>
+    </section>
+  </main>
 </body>
 </html>
 HTML
 
-renderer = ERB.new(template_html)
-File.write('index.html', renderer.result)
+File.write('index.html', html_content)
 puts "index.html gerado com sucesso!"
